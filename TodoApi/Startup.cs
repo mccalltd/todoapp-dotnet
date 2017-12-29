@@ -39,7 +39,10 @@ namespace TodoApi
                 // Set the comments path for the Swagger JSON and UI.
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 var xmlPath = Path.Combine(basePath, "TodoApi.xml");
-                c.IncludeXmlComments(xmlPath);
+                if (File.Exists(xmlPath))
+                {
+                    c.IncludeXmlComments(xmlPath);
+                }
             });
         }
 
@@ -49,6 +52,7 @@ namespace TodoApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                InitializeDatabase(app.ApplicationServices.GetService<TodoContext>());
             }
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -61,6 +65,15 @@ namespace TodoApi
             });
 
             app.UseMvc();
+        }
+
+        private void InitializeDatabase(TodoContext context)
+        {
+            if (context.TodoItems.Count() == 0)
+            {
+                context.TodoItems.Add(new TodoItem { Name = "Stub Me!" });
+                context.SaveChanges();
+            }
         }
     }
 }

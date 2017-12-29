@@ -4,9 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <!-- <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\TodoApi.xml</DocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup> -->
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
